@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+  <title>Products | DUNDER MIFFLIN</title>
+  <head>
+    <script src="products.js"></script>
+    <link href = "StyleSheet.css" rel = "stylesheet">
+    <link href = "CheckoutStyleSheet.css" rel = "stylesheet"> 
+    <!--The style of the page goes here-->
+    <style>
+      h1 {
+        text-align: center;
+      }
+      .product-selection {
+        border: 0.5px ridge grey;
+        background-color: rgb(235, 235, 235);
+        grid-row-start: 1;
+        grid-row-end: -1;
+        grid-column-start: col0;
+        grid-column-end: col1;
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+
+      }
+      .product-image {
+        text-align: center;
+        grid-row-start: r0;
+        grid-row-end: r1;
+        padding-top: 10px;
+      }
+
+      .product-desc {
+        text-align: center;
+        background-color: white;
+        grid-row-start: r1;
+        grid-row-end: auto;
+
+      }
+      .grid-container {
+        display: grid;
+        row-gap: 20px;
+        column-gap: 10px;
+        grid-template-rows: [row0] 325px [row1] 325px [row2] 325px [row3] 325px;
+        grid-template-columns: [col0] 15% [col1] auto [col2] auto [col3] auto [col4] auto [col5] auto;
+      }
+
+      .grid-product {
+        border: 2px solid rgba(0, 0, 0, 0.05);
+        background-color: white;
+        margin: 12px;
+        display: grid;
+        grid-template-rows: [r0] 200px [r1] auto;
+        grid-template-columns: [c0] auto;
+        transition-duration: 400ms;
+      }
+      .product-selection-container {
+        margin-top: 10px;
+        margin-left: 10px;
+      }
+
+      .grid-product:hover {
+        transition-duration: 400ms;
+        transform: scale(1.04);
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+        
+      }
+        /*The following styles are taken from this website: https://www.w3schools.com/howto/howto_css_custom_checkbox.asp
+        I had no idea how to customize checkboxes so I had to google it and found this source*/
+
+      /* Customize the label (the container) */
+      .filter {
+        display: block;
+        position: relative;
+        padding: 8px;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 20px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      /* Hide the browser's default checkbox */
+      .filter input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+      }
+
+      /* Create a custom checkbox */
+      .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+        border: 1px solid black;
+      }
+
+      /* On mouse-over, add a grey background color */
+      .filter:hover input ~ .checkmark {
+        background-color: #ccc;
+      }
+
+      /* When the checkbox is checked, add a blue background */
+      .filter input:checked ~ .checkmark {
+        background-color: #2196F3;
+      }
+
+      /* Create the checkmark/indicator (hidden when not checked) */
+      .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+      }
+
+      /* Show the checkmark when checked */
+      .filter input:checked ~ .checkmark:after {
+        display: block;
+      }
+
+      /* Style the checkmark/indicator */
+      .filter .checkmark:after {
+        left: 9px;
+        top: 5px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+
+    </style>
+  </head>
+
+  <!--Navigation links-->
+  <body class = "body">
+    <div class = "nav">
+      <img class = "leftNav" src="Images/Dunder_Mifflin_logo.png" width="140" height="80">
+      <a class = "leftNav" href="index.html"> HOME</a>
+      <a class = "leftNav" href="products.html"> PAPER</a>
+      <a class = "leftNav" href="about.html"> ABOUT</a>
+      <a class = "leftNav" href="FAQ.html"> FAQ</a>
+      <a class = "rightNav" href = "login.html">LOG IN</a>
+      <a class = "rightNav" href = "cart.html"><img class = "rightImg" width = "30" 
+        height = "30" src = "Images/cart_icon.png"></a>
+      <form class = "rightNav"><input type = "search" placeholder = "Search" 
+        style="width: 300px; padding: 9px 20px; margin: 18px 10px; 
+        display:inline-block; border: 1px solid#ccc; box-sizing: 
+        border-box;"></form>
+    </div>
+    <main>
+      <font face = "Times New Roman"><br><br><br>
+        <center><img src="Images/Dunder_Mifflin_logo_Black.png" width=200px></center><br><br>
+
+        <h1 id = "products-title"></h1>
+        <div class="grid-container">
+          <div class = "product-selection">
+              <div class = "product-selection-container">
+                <h3>Paper Color</h3>
+                <label class="filter">White
+                  <input type="checkbox" class = "filter-option" data-color = "white" onclick= "filterProductColor(this)">
+                  <span class="checkmark"></span>
+                </label>
+
+                <label class="filter">Blue
+                  <input type="checkbox" class = "filter-option" data-color = "blue" onclick= "filterProductColor(this)">
+                  <span class="checkmark"></span>
+                </label>
+
+                <label class="filter">Red
+                  <input type="checkbox" class = "filter-option" data-color = "red" onclick= "filterProductColor(this)">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="filter">Yellow
+                  <input type="checkbox" class = "filter-option" data-color = "yellow" onclick= "filterProductColor(this)">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="filter">Pink
+                  <input type="checkbox" class = "filter-option" data-color = "pink" onclick= "filterProductColor(this)">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="filter">Purple
+                  <input type="checkbox" class = "filter-option" data-color = "purple" onclick= "filterProductColor(this)">
+                  <span class="checkmark"></span>
+                </label>
+                <br>
+                <h3></h3>
+              </div>
+          </div>
+          <div class = "grid-product" data-color= "white" data-size = "size8.5_11">
+            <div class = "product-image">
+            <a href = "paperWhite.html"><img width = "200" height = "200" src = "Images/paperWhite.png"></a>
+            </div>
+            <div class = "product-desc">
+              <br><h4>White Printer Paper</h4>
+            </div>
+          </div>
+          <div class = "grid-product" data-color= "yellow" data-size = "size8.5_11">
+            <div class = "product-image">
+              <a href = "paperYellow.html"><img width = "200" height = "200" src = "Images/paperYellow.png"></a>
+            </div>
+            <div class = "product-desc">
+              <br><h4>Yellow Printer Paper</h4>
+            </div>
+          </div>
+          <div class = "grid-product" data-color= "red" data-size = "size11_17">
+            <div class = "product-image">
+              <a href = "paperRed.html"><img width = "200" height = "200" src = "Images/paperRed.png"></a>
+            </div>
+            <div class = "product-desc">
+              <br><h4>Red Printer Paper</h4>
+            </div>
+          </div>
+          <div class = "grid-product" data-color= "purple" data-size = "size11_17">
+            <div class = "product-image">
+              <a href = "paperPurple.html"><img width = "200" height = "200" src = "Images/paperPurple.png"></a>
+            </div>
+            <div class = "product-desc">
+              <br><h4>Purple Printer Paper</h4>
+            </div>
+          </div>
+          <div class = "grid-product" data-color= "blue" data-size = "size11_17">
+            <div class = "product-image">
+              <a href = "paperBlue.html"><img width = "200" height = "200" src = "Images/paperBlue.png"></a>
+            </div>
+            <div class = "product-desc">
+              <br><h4>Blue Printer Paper</h4>
+            </div>
+          </div>
+          <div class = "grid-product" data-color= "pink" data-size = "size8.5_14">
+            <div class = "product-image">
+              <a href = "paperPink.html"><img width = "200" height = "200" src = "Images/paperPink.png"></a>
+            </div>
+            <div class = "product-desc">
+              <br><h4>Pink Printer Paper</h4>
+            </div>
+          </div>
+          <div class = "grid-product" data-color= "white" data-size = "size8.5_14">
+            <div class = "product-image">
+            <a href = "paperWhite.html"><img width = "200" height = "200" src = "Images/origamiWhite.png"></a>
+            </div>
+            <div class = "product-desc">
+              <br><h4>White Origami Paper</h4><br>
+            </div>
+          </div>
+          <div class = "grid-product" data-color= "yellow" data-size = "size8.5_14">
+            <div class = "product-image">
+            <a href = "paperWhite.html"><img width = "200" height = "200" src = "Images/origamiYellow.png"></a>
+            </div>
+            <div class = "product-desc">
+              <br><h4>Yellow Origami Paper</h4><br>
+            </div>
+          </div>
+          <div class = "grid-product" data-color= "red" data-size = "size8.5_14">
+            <div class = "product-image">
+            <a href = "paperWhite.html"><img width = "200" height = "200" src = "Images/origamiRed.png"></a>
+            </div>
+            <div class = "product-desc">
+              <br><h4>Red Origami Paper</h4><br>
+            </div>
+          </div>
+          <div class = "grid-product" data-color= "purple" data-size = "size8.5_14">
+            <div class = "product-image">
+            <a href = "paperPurple.html"><img width = "200" height = "200" src = "Images/origamiPurple.png"></a>
+            </div>
+            <div class = "product-desc">
+              <br><h4>Purple Origami Paper</h4><br>
+            </div>
+          </div>
+          <div class = "grid-product" data-color= "blue" data-size = "size8.5_14">
+            <div class = "product-image">
+            <a href = "paperBlue.html"><img width = "200" height = "200" src = "Images/origamiBlue.png"></a>
+            </div>
+            <div class = "product-desc">
+              <br><h4>Blue Origami Paper</h4><br>
+            </div>
+          </div>
+          <div class = "grid-product" data-color= "pink" data-size = "size8.5_14">
+            <div class = "product-image">
+            <a href = "paperPink.html"><img width = "200" height = "200" src = "Images/origamiPink.png"></a>
+            </div>
+            <div class = "product-desc">
+              <br><h4>Pink Origami Paper</h4><br>
+            </div>
+          </div>
+          <div class = "grid-product" data-color= "white" data-size = "size8.5_14">
+            <div class = "product-image">
+            <a href = "paperWhite.html"><img width = "200" height = "200" src = "Images/craftWhite.jpg"></a>
+            </div>
+            <div class = "product-desc">
+              <br><h4>White Kraft Paper</h4><br>
+            </div>
+          </div>
+          <div class = "grid-product" data-color= "yellow" data-size = "size8.5_14">
+            <div class = "product-image">
+            <a href = "paperYellow.html"><img width = "200" height = "200" src = "Images/craftYellow.png"></a>
+            </div>
+            <div class = "product-desc">
+              <br><h4>Yellow Kraft Paper</h4><br>
+            </div>
+          </div>
+          <div class = "grid-product" data-color= "red" data-size = "size8.5_14">
+            <div class = "product-image">
+            <a href = "paperRed.html"><img width = "200" height = "200" src = "Images/craftRed.png"></a>
+            </div>
+            <div class = "product-desc">
+              <br><h4>Red Kraft Paper</h4><br>
+            </div>
+          </div>
+          <div class = "grid-product" data-color= "purple" data-size = "size8.5_14">
+            <div class = "product-image">
+            <a href = "paperPurple.html"><img width = "200" height = "200" src = "Images/craftPurple.png"></a>
+            </div>
+            <div class = "product-desc">
+              <br><h4>Purple Kraft Paper</h4><br>
+            </div>
+          </div>
+          <div class = "grid-product" data-color= "blue" data-size = "size8.5_14">
+            <div class = "product-image">
+            <a href = "paperWhite.html"><img width = "200" height = "200" src = "Images/craftBlue.png"></a>
+            </div>
+            <div class = "product-desc">
+              <br><h4>Blue Kraft Paper</h4><br>
+            </div>
+          </div>
+          <div class = "grid-product" data-color= "pink" data-size = "size8.5_14">
+            <div class = "product-image">
+            <a href = "paperWhite.html"><img width = "200" height = "200" src = "Images/craftPink.png"></a>
+            </div>
+            <div class = "product-desc">
+              <br><h4>Pink Kraft Paper</h4><br>
+            </div>
+          </div>
+        </div>
+      </font>
+    </main>
+  </body>
+
+  <footer class = "footer">
+
+  </footer>
+</html>
