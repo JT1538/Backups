@@ -64,13 +64,15 @@
       </form>
   </div>
         <br>Already have an account?
-        <br><a href="Login.php">LOGIN</a>
+        <br><a href="login.php">LOGIN</a>
 
       </td>
 
     </tr>
 
-  </table><br><br><br><br><br><br><br><br>
+  </table><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
   </center></body></font>
 
 
